@@ -1,4 +1,7 @@
 public class Area {
+    public static final String DIRECTION_X = "x";
+    public static final String DIRECTION_Y = "y";
+
     private int x;
     private int y;
 
@@ -21,5 +24,9 @@ public class Area {
     public Area(int width, int height) {
         setX(width);
         setY(height);
+    }
+
+    public boolean containXDirection(int i, String directionX) {
+        return DIRECTION_X.equals(directionX) ? i>getX():i>getY();
     }
 }

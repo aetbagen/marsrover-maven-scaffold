@@ -4,17 +4,22 @@ public class Rover {
     public static final String WEST = "W";
     public static final String NORTH = "N";
     public static final String SOUTH = "S";
+    public static final String DIRECTION_CIRCLE = NORTH + EAST + SOUTH + WEST;
+    public static final String[] S = new String[]{NORTH, EAST, SOUTH, WEST};
+    public static final String TURN_LEFT = "L";
+    public static final String TURN_RIGHT = "R";
     private int xLocation;
     private int yLocation;
     private String direction;
     private Area area;
 
+
     public void land(Area areaParamter, int i, int j, String h) {
         this.area = areaParamter;
-        if (i > area.getX()) {
+        if (area.containXDirection(i,Area.DIRECTION_X)) {
             throw new IllegalArgumentException("out of bound !");
         }
-        if (j > area.getY()) {
+        if (area.containXDirection(j,Area.DIRECTION_Y)) {
             throw new IllegalArgumentException("out of bound !");
         }
         xLocation = i;
@@ -31,8 +36,7 @@ public class Rover {
         switch (direction) {
             case EAST:
                 x = xLocation +1;
-                xLocation += 1;
-                if (x>area.getX()) {
+                if (area.containXDirection(x,Area.DIRECTION_X)) {
                     throw new IllegalArgumentException("out of bound !");
                 }
                 xLocation = x;
@@ -42,7 +46,7 @@ public class Rover {
                 break;
             case NORTH:
                 y = yLocation + 1;
-                if (y>area.getY()) {
+                if (area.containXDirection(y,Area.DIRECTION_X)) {
                     throw new IllegalArgumentException("out of bound !");
                 }
                 yLocation =y;
@@ -56,36 +60,33 @@ public class Rover {
 
     public void turnLeft() {
 
-        switch (direction) {
-            case EAST:
-                direction = NORTH;
-                break;
-            case WEST:
-                direction = SOUTH;
-                break;
-            case NORTH:
-                direction = WEST;
-                break;
-            case SOUTH:
-                direction = EAST;
-                break;
-        }
+        direction = findDirection(direction,TURN_LEFT);
     }
 
     public void turnRight() {
-        switch (direction) {
-            case EAST:
-                direction = SOUTH;
-                break;
-            case WEST:
-                direction = NORTH;
-                break;
-            case NORTH:
-                direction = EAST;
-                break;
-            case SOUTH:
-                direction = WEST;
-                break;
+        direction = findDirection(direction,TURN_RIGHT);
+    }
+
+    private String findDirection(String direction,String turnDirection){
+        int i = fintDirection(direction,turnDirection);
+        return S[i];
+    }
+
+    private int fintDirection(String direction,String leftOrRight) {
+        int i = DIRECTION_CIRCLE.indexOf(direction);
+        if(TURN_RIGHT.equals(leftOrRight)){
+            if(i==3){
+                i = 0;
+            }else {
+                i++;
+            }
+        }else if(TURN_LEFT.equals(leftOrRight)){
+            if(i==0){
+                i = 3;
+            }else {
+                i--;
+            }
         }
+        return i;
     }
 }

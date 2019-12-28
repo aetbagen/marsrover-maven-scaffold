@@ -16,10 +16,10 @@ public class Rover {
 
     public void land(Area areaParamter, int i, int j, String h) {
         this.area = areaParamter;
-        if (area.containXDirection(i,Area.DIRECTION_X)) {
+        if (area.containXDirection(i, Area.DIRECTION_X)) {
             throw new IllegalArgumentException("out of bound !");
         }
-        if (area.containXDirection(j,Area.DIRECTION_Y)) {
+        if (area.containXDirection(j, Area.DIRECTION_Y)) {
             throw new IllegalArgumentException("out of bound !");
         }
         xLocation = i;
@@ -32,11 +32,11 @@ public class Rover {
     }
 
     public void move() {
-        int x,y;
+        int x, y;
         switch (direction) {
             case EAST:
-                x = xLocation +1;
-                if (area.containXDirection(x,Area.DIRECTION_X)) {
+                x = xLocation + 1;
+                if (area.containXDirection(x, Area.DIRECTION_X)) {
                     throw new IllegalArgumentException("out of bound !");
                 }
                 xLocation = x;
@@ -46,10 +46,10 @@ public class Rover {
                 break;
             case NORTH:
                 y = yLocation + 1;
-                if (area.containXDirection(y,Area.DIRECTION_X)) {
+                if (area.containXDirection(y, Area.DIRECTION_X)) {
                     throw new IllegalArgumentException("out of bound !");
                 }
-                yLocation =y;
+                yLocation = y;
                 break;
             case SOUTH:
                 yLocation -= 1;
@@ -60,30 +60,30 @@ public class Rover {
 
     public void turnLeft() {
 
-        direction = findDirection(direction,TURN_LEFT);
+        direction = findDirection(direction, TURN_LEFT);
     }
 
     public void turnRight() {
-        direction = findDirection(direction,TURN_RIGHT);
+        direction = findDirection(direction, TURN_RIGHT);
     }
 
-    private String findDirection(String direction,String turnDirection){
-        int i = fintDirection(direction,turnDirection);
+    private String findDirection(String direction, String turnDirection) {
+        int i = fintDirection(direction, turnDirection);
         return S[i];
     }
 
-    private int fintDirection(String direction,String leftOrRight) {
+    private int fintDirection(String direction, String leftOrRight) {
         int i = DIRECTION_CIRCLE.indexOf(direction);
-        if(TURN_RIGHT.equals(leftOrRight)){
-            if(i==3){
+        if (TURN_RIGHT.equals(leftOrRight)) {
+            if (i == 3) {
                 i = 0;
-            }else {
+            } else {
                 i++;
             }
-        }else if(TURN_LEFT.equals(leftOrRight)){
-            if(i==0){
+        } else if (TURN_LEFT.equals(leftOrRight)) {
+            if (i == 0) {
                 i = 3;
-            }else {
+            } else {
                 i--;
             }
         }

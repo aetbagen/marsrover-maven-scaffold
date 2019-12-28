@@ -27,6 +27,6 @@ public class Area {
     }
 
     public boolean containXDirection(int i, String directionX) {
-        return DIRECTION_X.equals(directionX) ? i>getX():i>getY();
+        return DIRECTION_X.equals(directionX) ? i > getX() : i > getY();
     }
 }

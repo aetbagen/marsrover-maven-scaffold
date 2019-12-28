@@ -54,6 +54,9 @@ public class Rover {
             case SOUTH:
                 yLocation -= 1;
                 break;
+            default:
+                throw new IllegalArgumentException("Command is not Found");
+
         }
 
     }
